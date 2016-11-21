@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/App_Engine/App_Engine.iml" filepath="$PROJECT_DIR$/App_Engine/App_Engine.iml" />
       <module fileurl="file://$PROJECT_DIR$/NDSUNutrition.iml" filepath="$PROJECT_DIR$/NDSUNutrition.iml" />
       <module fileurl="file://$PROJECT_DIR$/Unused/Unused.iml" filepath="$PROJECT_DIR$/Unused/Unused.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Unused/Unused.iml" filepath="$PROJECT_DIR$/Unused/Unused.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
