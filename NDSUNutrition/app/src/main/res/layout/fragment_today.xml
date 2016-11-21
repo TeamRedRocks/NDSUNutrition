@@ -2,15 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="top|center_horizontal">
 
     <TextView
         android:text="@string/today_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/textViewToday"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textStyle="normal|bold"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:id="@+id/todayTextView"
-        android:layout_weight="1"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/textViewMeals"
+        android:layout_gravity="center_horizontal" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/meal_list"
+        ></ListView>
 </LinearLayout>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_add_item"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.redteam.ndsunutrition.PickRestaurantActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_restaurant"
+        android:id="@+id/textViewPickRestaurant"
+        android:textSize="@dimen/abc_text_size_display_1_material"
+        android:textColor="@android:color/background_dark"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerRestaurants"
+        style="@style/AppTheme"
+        android:layout_marginBottom="46dp"
+        android:layout_above="@+id/buttonSelectRestaurant"
+        android:layout_alignStart="@+id/textViewRestaurant" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_restaurant"
+        android:id="@+id/buttonSelectRestaurant"
+        android:onClick="viewMenu"
+        android:layout_marginBottom="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/textViewInvalidRestaurant" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/invalid_selection"
+        android:id="@+id/textViewInvalidRestaurant"
+        android:visibility="invisible"
+        android:textColor="@color/design_textinput_error_color_light"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="52dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/date"
+        android:textColor="@android:color/background_dark"
+        android:id="@+id/textViewMealDate"
+        android:layout_marginTop="22dp"
+        android:layout_below="@+id/textViewPickRestaurant"
+        android:layout_alignStart="@+id/textViewPickRestaurant" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/time"
+        android:id="@+id/textViewMealTime"
+        android:layout_marginTop="48dp"
+        android:layout_below="@+id/spinnerDate"
+        android:textColor="@android:color/background_dark"
+        android:layout_alignStart="@+id/textViewMealDate" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/restaurant"
+        android:textColor="@android:color/background_dark"
+        android:id="@+id/textViewRestaurant"
+        android:layout_above="@+id/spinnerRestaurants"
+        android:layout_alignStart="@+id/spinnerTime" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerDate"
+        android:layout_below="@+id/textViewMealDate"
+        android:layout_alignStart="@+id/textViewMealDate" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerTime"
+        android:entries="@array/time_array"
+        android:layout_below="@+id/textViewMealTime"
+        android:layout_alignStart="@+id/textViewMealTime" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupTime"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignEnd="@+id/textViewPickRestaurant"
+        android:layout_alignTop="@+id/spinnerTime"
+        android:layout_toEndOf="@+id/textViewRestaurant"
+        android:layout_above="@+id/textViewRestaurant">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AM"
+            android:id="@+id/radioButtonAM" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PM"
+            android:id="@+id/radioButtonPM" />
+
+    </RadioGroup>
+
+</RelativeLayout>
