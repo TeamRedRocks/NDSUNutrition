@@ -1,4 +1,4 @@
-package nutrition.app;
+package com.Engine;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public interface CalculatorInterface {
     
     public List<Recommendation> getRecommendations(int num, AppState as);
     public List<Date> getListDates(int numDaysPriorToToday);
-    public double getPDV(NutrientTotal nutrientTotal);
+    public double getPDV(NutrientTotal nutrientTotal, RecommendedDailyAllowance rda);
     public List<NutrientTotal> getNutrientTotals(Date fromDate, Date toDate, UserProfile userProfile);
     
 }

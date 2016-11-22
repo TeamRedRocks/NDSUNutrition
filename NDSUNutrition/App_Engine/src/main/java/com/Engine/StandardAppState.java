@@ -3,9 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nutrition.app;
+package com.Engine;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -107,7 +118,41 @@ public class StandardAppState implements AppState{
 
     @Override
     public List<Venue> constructListVenues() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList list = new ArrayList<Venue>(3);
+        try {
+            //private static final String sURL = "http//rin.cs.ndsu.nodak.edu:4567/venues/1/meals/";
+
+            JsonParser jp = new JsonParser();
+
+            URL url = new URL("http://rin.cs.ndsu.nodak.edu:4567/venues");
+
+            //String sURL = readUrl("http//rin.cs.ndsu.nodak.edu:4567/venues/1/meals");
+            HttpURLConnection request = (HttpURLConnection) url.openConnection();
+            request.connect();
+
+            System.out.println(request.getErrorStream());
+            Gson gs = new Gson();
+            //Throws IOException?
+            JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
+
+            JsonObject rootobj = root.getAsJsonObject(); //May be an array, may be an object.
+
+            String zipcode = rootobj.get("venues").getAsString();
+            //String test = rootobj.get("protein").getAsString();
+
+
+            list.add(zipcode);
+
+        } catch (MalformedURLException mfe) {
+            System.out.println(mfe.getMessage() + "This is an error");
+        }
+        catch(IOException ioe){
+
+            System.out.println(ioe.getMessage() + "This is another error");
+            System.out.println(Arrays.toString(ioe.getStackTrace()));
+        }
+        return list;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
    
     

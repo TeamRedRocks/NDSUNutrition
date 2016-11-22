@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nutrition.app;
+package com.Engine;
 
 import java.util.Objects;
 import java.io.Serializable;
@@ -69,13 +69,13 @@ public class MealEntry implements Serializable{
         {
            MenuItem o = (MenuItem) obj; 
            
-           double compVal = (menuItem.servingSize) - (o.servingSize);
+           double compVal = (menuItem.getServingSize()) - (o.getServingSize());
            boolean b1 = Math.abs(compVal) <= 0.000001;
-           boolean b2 = menuItem.category.equals(o.category);
-           boolean b3 = menuItem.infoSource.equals(o.infoSource);
-           boolean b4 = menuItem.name.equals(o.name);
-           boolean b5 = menuItem.servingUnit.equals(o.servingUnit);
-           boolean b6 = menuItem.venue.equals(o.venue);
+           boolean b2 = menuItem.getCategory().equals(o.getCategory());
+           boolean b3 = menuItem.getInfoSource().equals(o.getInfoSource());
+           boolean b4 = menuItem.getName().equals(o.getName());
+           boolean b5 = menuItem.getServingUnit().equals(o.getServingUnit());
+           boolean b6 = menuItem.getVenue().equals(o.getVenue());
            
             return (b1 && b2 && b3 && b4 && b5 && b6);
         

@@ -47,8 +47,8 @@ public class Meal implements Serializable {
         this.date = date;
     }
 
-    public List<MealEntry> getMealEntries(int index) {
-        return mealEntries.subList(index, index);
+    public List<MealEntry> getMealEntries() {
+        return mealEntries;
     }
 
 //      WHAT IS THIS SUPPOSE TO DO??????

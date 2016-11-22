@@ -123,7 +123,7 @@ public class MenuItem implements MenuInterface{
         //Explain how this should function. Like does this need to be a list of nutrient totals that get added
         //when this class is created or is there suppose to be a list already made that has this information.
     @Override
-    public List<NutrientTotal> getNutrientTotals() {
+    public List<NutrientTotal> getNutrients() {
         return nutrientTotal;
     }
 

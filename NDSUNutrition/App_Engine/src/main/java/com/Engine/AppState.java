@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nutrition.app;
+package com.Engine;
 
 import java.util.List;
 
@@ -12,11 +12,11 @@ import java.util.List;
  * @author mitchell.olson.1
  */
 public interface AppState {
-    public List<MenuItem> getListMenuItems();
-    public void setListOfMenuItems(List<MenuItem> menuItems);
-    public UserProfile getUserProfile();
-    public void setUserProfile(UserProfile profile);
-    public List<Venue> getListOfVenues();
+    List<MenuItem> getListMenuItems();
+    void setListOfMenuItems(List<MenuItem> menuItems);
+    UserProfile getUserProfile();
+    void setUserProfile(UserProfile profile);
+    List<Venue> getListOfVenues();
     public void setListVenues(List<Venue> venues);
     public List<Recommendation> getRecommendationsList();
     public void setRecommendationsList(List<Recommendation> list);
