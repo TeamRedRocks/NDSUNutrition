@@ -27,6 +27,11 @@ public class MenuItem implements MenuInterface {
     private String infoSource;
     private String venue;
 
+    public MenuItem()
+    {
+        //Empty constructor to solve so errors cause by MealEntry. This is only temporary.
+    }
+
     public MenuItem(String name, double servingSize, String servingUnit, List<NutrientTotal> nutrientList, String category, String infoSource, String venue)
     {
 

@@ -24,6 +24,11 @@ public class StandardUserProfile implements UserProfile {
 
     private List <Meal> meals = new ArrayList();
 
+    public StandardUserProfile()
+    {
+        //Empty constructor to solve so errors cause by MealEntry. This is only temporary.
+    }
+
     public StandardUserProfile(int calories, List<Meal> meals) {
         setRecommendedCalories(calories);
         setMeals(meals);
