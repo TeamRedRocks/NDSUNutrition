@@ -5,14 +5,15 @@ package com.Engine;
  * and open the template in the editor.
  */
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author jordan.r.falcon
  */
-public interface UserProfile {
-
+public interface UserProfile extends Serializable {
+    //testhh
     public int getRecommendedCalories();
     public void setRecommendedCalories(int calories);
     public int getWeight();
@@ -38,8 +39,6 @@ public interface UserProfile {
 
     @Override
     public boolean equals(Object o);
-
-
 
 
 }
