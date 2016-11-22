@@ -20,7 +20,7 @@ public interface AppState {
     public void setListVenues(List<Venue> venues);
     public List<Recommendation> getRecommendationsList();
     public void setRecommendationsList(List<Recommendation> list);
-
+    //Might need to be a string
     public Date getSystemTime();
     public void sortMenuItems();
     public void sortVenues();

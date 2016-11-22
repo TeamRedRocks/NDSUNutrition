@@ -30,6 +30,8 @@ public class MealEntry extends MenuItem{
 
     }
 
+
+
     public MenuItem getMenuItem(){
         return menuItem;
     }

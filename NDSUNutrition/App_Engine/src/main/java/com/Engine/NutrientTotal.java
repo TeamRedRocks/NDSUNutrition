@@ -2,13 +2,14 @@ package com.Engine;
 
 
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
  * @author donovan.beckmann
  */
-public class NutrientTotal {
+public class NutrientTotal implements Serializable {
     private Nutrient nutrient;
     private double amount;
 
@@ -33,30 +34,21 @@ public class NutrientTotal {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 5;
-        return hash;
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (!(o instanceof NutrientTotal)) return false;
+
+        NutrientTotal that = (NutrientTotal) o;
+
+        if (Double.compare(that.amount, amount) != 0) return false;
+        return nutrient != null ? nutrient.equals(that.nutrient) : that.nutrient == null;
+
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final NutrientTotal other = (NutrientTotal) obj;
-        if (Double.doubleToLongBits(this.amount) != Double.doubleToLongBits(other.amount)) {
-            return false;
-        }
-        if (!Objects.equals(this.nutrient, other.nutrient)) {
-            return false;
-        }
-        return true;
+    public int hashCode() {
+        return 0;
     }
 
     @Override

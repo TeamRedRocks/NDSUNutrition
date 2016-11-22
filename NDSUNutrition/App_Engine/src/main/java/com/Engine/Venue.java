@@ -8,12 +8,30 @@ import java.io.Serializable;
  */
 public class Venue implements Serializable{
     private String name;
-    private String memberName;
 
     public Venue(String name)
     {
         this.name = name;
     }
 
-    public String getName() { return name;}
+    public String getName() {
+        return name;}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Venue)) return false;
+
+        Venue venue = (Venue) o;
+
+        return name != null ? name.equals(venue.name) : venue.name == null;
+
+    }
+
+    @Override
+    public String toString() {
+        return "Venue{" +
+                "name ='" + name + '\'' +
+                '}';
+    }
 }

@@ -30,42 +30,42 @@ public class StandardAppState implements AppState{
 
     @Override
     public List<MenuItem> getListMenuItems() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return menuItems;
     }
 
     @Override
     public void setListOfMenuItems(List<MenuItem> menuItems) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.menuItems = menuItems;
     }
 
     @Override
     public UserProfile getUserProfile() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return userProfile;
     }
 
     @Override
     public void setUserProfile(UserProfile profile) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       userProfile = profile;
     }
 
     @Override
     public List<Venue> getListOfVenues() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return venues;
     }
 
     @Override
     public void setListVenues(List<Venue> venues) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         this.venues = venues;
     }
 
     @Override
     public List<Recommendation> getRecommendationsList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return recommendationsList;
     }
 
     @Override
     public void setRecommendationsList(List<Recommendation> list) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        recommendationsList = list;
     }
 
     @Override
@@ -75,7 +75,7 @@ public class StandardAppState implements AppState{
 
     @Override
     public void sortMenuItems() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //
     }
 
     @Override

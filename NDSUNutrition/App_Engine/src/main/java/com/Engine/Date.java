@@ -1,10 +1,12 @@
 package com.Engine;
 
+import java.io.Serializable;
+
 /**
  *
  * @author donovan.beckmann
  */
-public interface Date {
+public interface Date extends Serializable {
     public int getYear();
     public void setYear(int yyyy);
 
