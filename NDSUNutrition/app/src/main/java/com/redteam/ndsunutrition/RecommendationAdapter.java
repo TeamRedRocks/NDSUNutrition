@@ -15,28 +15,36 @@ import java.util.List;
 
 public class RecommendationAdapter extends ArrayAdapter{
 
+    //Manipulated list
     private List list = new ArrayList();
 
+    //Constructor
     public RecommendationAdapter(Context context, int resource)
     {
         super(context,resource);
     }
 
-    public void add(Object obj)
-    {
-        list.add(obj);
-    }
-
+    //Accessor for the count of the list
     public int getCount()
     {
         return this.list.size();
     }
 
-    public Object getItem(int possition)
+    //Accessor for a particular position
+    public Object getItem(int position)
     {
-        return this.list.get(possition);
+        return this.list.get(position);
     }
 
+    //Add override
+    @Override
+    public void add(Object obj)
+    {
+        list.add(obj);
+    }
+
+    //Override to get the current view
+    @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
         View row = convertView;
