@@ -1,10 +1,9 @@
-package com.Engine;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package nutrition.app;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,19 +13,17 @@ import java.util.List;
  * @author mitchell.olson.1
  */
 public class StandardAppState implements AppState{
-
+    
     private List<Venue> venues = new ArrayList();
     private List<MenuItem> menuItems = new ArrayList();
     private List<Recommendation> recommendationsList = new ArrayList();
     private UserProfile userProfile = new StandardUserProfile();
-
+    
 
     public StandardAppState() {
-
-
-
+        
     }
-
+    
 
     @Override
     public List<MenuItem> getListMenuItems() {
@@ -93,5 +90,25 @@ public class StandardAppState implements AppState{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public void constructUserProfile() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
+    @Override
+    public List<MenuItem> constructListOfMenuItems(String venue) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Recommendation> constructRecommendationsList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Venue> constructListVenues() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+   
+    
 }
