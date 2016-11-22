@@ -6,6 +6,7 @@ package com.Engine;
  */
 
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -21,7 +22,7 @@ public class MealEntry extends MenuItem{
     MenuItem menuItem = new MenuItem();
     double amount;
 
-    public MealEntry(MenuItem item, double amount) {
+    public MealEntry (MenuItem item, double amount) {
         if(item != null)
             menuItem = item;
 

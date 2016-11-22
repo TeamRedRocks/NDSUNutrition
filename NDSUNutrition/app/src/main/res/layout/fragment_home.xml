@@ -53,16 +53,26 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="20dp"
             android:id="@+id/txtRecommendations"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:textSize="20dp" />
 
     </RelativeLayout>
 
-
-    <ListView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recommendationList"
-        ></ListView>
+        android:layout_height="180dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1">
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:id="@+id/recommendationList"
+            ></ListView>
+        </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>
