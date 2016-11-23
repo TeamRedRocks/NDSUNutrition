@@ -24,8 +24,25 @@ public class StandardUserProfile implements UserProfile {
 
     private List <Meal> meals = new ArrayList();
 
-    public StandardUserProfile() {
+    public StandardUserProfile()
+    {
+        //Empty constructor to solve so errors cause by MealEntry. This is only temporary.
+    }
 
+    public StandardUserProfile(int calories, List<Meal> meals) {
+        setRecommendedCalories(calories);
+        setMeals(meals);
+    }
+
+    public StandardUserProfile(int calories, List<Meal>meals, int weight, int height, char gender, int age, int activityLevel)
+    {
+        setRecommendedCalories(calories);
+        setMeals(meals);
+        this.weight = weight;
+        this.height = height;
+        this.gender = gender;
+        this.age = age;
+        this.activityLevel = activityLevel;
     }
 
     @Override
@@ -112,14 +129,14 @@ public class StandardUserProfile implements UserProfile {
     @Override
     public List<Meal> getMealsFor(Date date) {
 
-            for (Meal listMeals : meals)
-            {
-                for (int i = 0; i < meals.size(); i++)
-                if (meals.get(i).getDate().equals(date))
+        for (Meal listMeals : meals)
+        {
+            for (int i = 0; i < meals.size(); i++)
+                if (meals.get(i).getDate().getDay() == date.getDay())
                 {
                     return meals;
                 }
-            }
+        }
         return null;
     }
 

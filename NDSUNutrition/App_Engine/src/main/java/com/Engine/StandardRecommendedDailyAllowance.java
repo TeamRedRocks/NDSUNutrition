@@ -13,7 +13,7 @@ public class StandardRecommendedDailyAllowance {
     private final int TOTALCARB_STANDARD = 300;
     private final int DIETARYFIBER_STANDARD = 25;
     private final int SUGAR_STANDARD = 25;
-    private final int PROTIEN_STANDARD = 50;
+    private final int PROTEIN_STANDARD = 50;
     private final int POTASSIUM_STANDARD = 3500;
 
     public StandardRecommendedDailyAllowance() {

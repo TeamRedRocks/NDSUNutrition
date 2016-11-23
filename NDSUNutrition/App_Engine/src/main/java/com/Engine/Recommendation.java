@@ -39,6 +39,15 @@ public class Recommendation {
         this.source = source;
     }
 
+    public Nutrient getNutrient()
+    {
+        return nutrient;
+    }
+
+    public void setNutrient(Nutrient n) {
+        nutrient = n;
+    }
+
     @Override
     public String toString() {
         return "Recommendation{" + "Title=" + title + ", Message=" + message + ", Source=" + source + '}';

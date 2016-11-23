@@ -79,16 +79,29 @@ public class MealDate implements Date, Serializable{
     }
 
     @Override
-    public String toString()
-    {
-        String s = year + ", " + month + ", " + day + ", " + hour + ", " + minute;
-        return s;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MealDate)) return false;
+
+        MealDate mealDate = (MealDate) o;
+
+        if (year != mealDate.year) return false;
+        if (month != mealDate.month) return false;
+        if (day != mealDate.day) return false;
+        if (hour != mealDate.hour) return false;
+        return minute == mealDate.minute;
+
     }
 
-    /*@Override
-    public boolean equals(Object o)
-    {
 
+    @Override
+    public String toString() {
+        return "MealDate{" +
+                "year =" + year +
+                ", month =" + month +
+                ", day =" + day +
+                ", hour =" + hour +
+                ", minute =" + minute +
+                '}';
     }
-    */
 }
