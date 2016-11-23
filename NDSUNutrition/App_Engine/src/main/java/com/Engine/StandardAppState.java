@@ -137,9 +137,9 @@ public class StandardAppState implements AppState{
 
             JsonObject rootobj = root.getAsJsonObject(); //May be an array, may be an object.
 
+            //How to do this?
             String zipcode = rootobj.get("venues").getAsString();
             //String test = rootobj.get("protein").getAsString();
-
 
             list.add(zipcode);
 

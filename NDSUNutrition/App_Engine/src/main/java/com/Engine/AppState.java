@@ -24,7 +24,7 @@ public interface AppState {
     public List<MenuItem> constructListOfMenuItems(String venue);
     public List<Recommendation> constructRecommendationsList();
     public List<Venue> constructListVenues();
-    
+    //
     public Date getSystemTime();
     public void sortMenuItems();
     public void sortVenues();

@@ -115,7 +115,7 @@ public class NutrientCalculator implements CalculatorInterface {
             
             
         }
-        
+        //return list;
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -175,8 +175,8 @@ public class NutrientCalculator implements CalculatorInterface {
         //test of the addition of a nutrient\
         //(String name, double servingSize, String servingUnit, Nutrient nutrient, String category, String infoSource, String venue) 
 
-        MealEntry na = new MealEntry(new MenuItem(), 5.0);
-        list.add(na);
+        //MealEntry na = new MealEntry(new MenuItem(), 5.0);
+        list.add(null);
 
         return list;
     }

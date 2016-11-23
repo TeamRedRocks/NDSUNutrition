@@ -8,7 +8,6 @@ package com.Engine;
 import java.util.List;
 
 /**
- *
  * @author mitchell.olson.1
  */
 public interface RecommendedDailyAllowance{

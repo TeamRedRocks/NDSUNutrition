@@ -25,7 +25,7 @@ public class Meal implements Serializable {
         this.date = date;
         mealEntries = mealList;
     }
-
+    //
     public Meal()
     {
 

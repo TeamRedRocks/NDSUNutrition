@@ -60,7 +60,7 @@ public class MealEntry implements Serializable{
 
     @Override
     public boolean equals(Object obj) {
-        
+        //
         if(!(obj instanceof MenuItem))
         {
             return false;
