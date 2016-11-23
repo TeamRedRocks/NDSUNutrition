@@ -8,6 +8,8 @@ package com.Engine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  *
@@ -27,6 +29,56 @@ public class StandardAppState implements AppState{
 
     }
 
+    private List<MealEntry> mealEntries = new ArrayList();
+    @Override
+    public void sortMenuItems() {
+
+        //java.util.Collections.sort(menuItems, Collator.getInstance());
+        if (!menuItems.isEmpty()) {
+            Collections.sort(menuItems, new Comparator<MenuItem>() {
+
+                public int compare(MenuItem item1, MenuItem item2) {
+
+                    return item1.getName().compareTo(item2.getName());
+                }
+
+            });
+        }
+    }
+
+    @Override
+    public void sortVenues() {
+        if (!venues.isEmpty()) {
+            Collections.sort(venues, new Comparator<Venue>() {
+
+                public int compare(Venue venue1, Venue venue2) {
+
+                    return venue1.getName().compareTo(venue2.getName());
+                }
+
+            });
+        }
+    }
+
+    @Override
+    public void sortMeals() {
+        if (!mealEntries.isEmpty()) {
+            Collections.sort(mealEntries, new Comparator<MealEntry>() {
+
+                public int compare(MealEntry mealEntry1, MealEntry mealEntry2) {
+
+                    return mealEntry1.getName().compareTo(mealEntry2.getName());
+                }
+
+            });
+        }
+
+    }
+
+    @Override
+    public int compare(Object o, Object t1) {
+        return 0;
+    }
 
     @Override
     public List<MenuItem> getListMenuItems() {
@@ -70,21 +122,6 @@ public class StandardAppState implements AppState{
 
     @Override
     public Date getSystemTime() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void sortMenuItems() {
-        //
-    }
-
-    @Override
-    public void sortVenues() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void sortMeals() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

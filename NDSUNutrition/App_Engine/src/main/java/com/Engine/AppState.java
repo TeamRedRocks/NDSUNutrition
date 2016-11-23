@@ -6,12 +6,13 @@
  */
 package com.Engine;
 import java.util.List;
+import java.util.Comparator;
 
 /**
  *
  * @author mitchell.olson.1
  */
-public interface AppState {
+public interface AppState extends Comparator {
     public List<MenuItem> getListMenuItems();
     public void setListOfMenuItems(List<MenuItem> menuItems);
     public UserProfile getUserProfile();
