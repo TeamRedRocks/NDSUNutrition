@@ -19,4 +19,59 @@ public class StandardRecommendedDailyAllowance {
     public StandardRecommendedDailyAllowance() {
     }
 
+    public int getCALORIES_STANDARD() {
+        return CALORIES_STANDARD;
+    }
+
+    public int getTOTALFAT_STANDARD() {
+        return TOTALFAT_STANDARD;
+    }
+
+    public int getSATURATEDFAT_STANDARD() {
+        return SATURATEDFAT_STANDARD;
+    }
+
+    public int getCHOLESTEROL_STANDARD() {
+        return CHOLESTEROL_STANDARD;
+    }
+
+    public int getSODIUM_STANDARD() {
+        return SODIUM_STANDARD;
+    }
+
+    public int getTOTALCARB_STANDARD() {
+        return TOTALCARB_STANDARD;
+    }
+
+    public int getDIETARYFIBER_STANDARD() {
+        return DIETARYFIBER_STANDARD;
+    }
+
+    public int getSUGAR_STANDARD() {
+        return SUGAR_STANDARD;
+    }
+
+    public int getPROTEIN_STANDARD() {
+        return PROTEIN_STANDARD;
+    }
+
+    public int getPOTASSIUM_STANDARD() {
+        return POTASSIUM_STANDARD;
+    }
+
+    @Override
+    public String toString() {
+        return "StandardRecommendedDailyAllowance{" +
+                "Calories: " + CALORIES_STANDARD +
+                ", Total Fat: " + TOTALFAT_STANDARD +
+                ", Saturated Fat: " + SATURATEDFAT_STANDARD +
+                ", Cholesterol: " + CHOLESTEROL_STANDARD +
+                ", Sodium: " + SODIUM_STANDARD +
+                ", Carbohydrates: " + TOTALCARB_STANDARD +
+                ", Dietary Fiber: " + DIETARYFIBER_STANDARD +
+                ", Sugar: " + SUGAR_STANDARD +
+                ", Protein: " + PROTEIN_STANDARD +
+                ", Potassium: " + POTASSIUM_STANDARD +
+                '}';
+    }
 }
