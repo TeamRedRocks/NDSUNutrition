@@ -74,8 +74,7 @@ public class MealDate implements Date, Serializable{
 
     @Override
     public String toLongString() {
-        return "Year: " + year + " Month: " + month + " Day: " + day + " Hour: "
-                + hour + " Minute: " + minute;
+        return day + "/" + month + "/" + year;
     }
 
     @Override
@@ -96,12 +95,7 @@ public class MealDate implements Date, Serializable{
 
     @Override
     public String toString() {
-        return "MealDate{" +
-                "year =" + year +
-                ", month =" + month +
-                ", day =" + day +
-                ", hour =" + hour +
-                ", minute =" + minute +
-                '}';
+        String s = year + ", " + month + ", " + day + ", " + hour + ", " + minute;
+        return s;
     }
 }
