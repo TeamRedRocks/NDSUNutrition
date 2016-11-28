@@ -6,6 +6,8 @@
 package com.Engine;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -22,13 +24,13 @@ import java.util.Arrays;
 /**
  *
  * @author mitchell.olson.1
- * 
+ *
  */
 public class NutrientCalculator implements CalculatorInterface {
 
-    
 
-    
+
+
     @Override
     public List<Recommendation> getRecommendations(int num, AppState as) {
         as.getRecommendationsList();
@@ -36,87 +38,166 @@ public class NutrientCalculator implements CalculatorInterface {
     }
 
     @Override
-    public List<Date> getListDates(int numDaysPriorToToday) {
-        
+    public List<Date> getListDates(int numDaysPriorToToday)
+    {
+
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     public List<Date> getListDates(Date fromDate, Date toDate)
     {
-        List<Date> list = new ArrayList<>();
-        
+        Date from = fromDate;
+        Date to = toDate;
+
+        //Currently only works for Dates with the same year and non-leap years
+        int size = returnSize(fromDate, toDate);
+
+        List<Date> list = new ArrayList<Date>();
+        list.add(fromDate); //doesn't work
+        for(int i = 0; i < size -2; i++){
+            if(from.getDay() < returnDaysInMonth(from.getMonth())) {
+                from.setDay(from.getDay() + 1);
+                list.add(from);
+            }
+            else if(from.getMonth() < 12)
+            {
+                from.setMonth(from.getMonth() +1);
+                list.add(from);
+            }
+            else
+            {
+                from.setYear(from.getYear()+1);
+                list.add(from);
+            }
+
+//            Date md = from;
+//            list.add(md);
+        }
+        list.add((size)-1, toDate);
+//        for(Date m : list){
+//            MealDate date = new MealDate(m.getYear(),
+//                    m.getMonth(), m.getDay(),
+//                    m.getHour(), m.getMinute());
+//            list.add(date);
+//        }
         return list;
     }
-    
+
     @Override
     public double getPDV(NutrientTotal nutrientTotal, RecommendedDailyAllowance rda) {
         String nutrient = nutrientTotal.getNutrient().getName();
         double pdv = 0.0;
         nutrientTotal.getAmount();
-        
+
         return pdv;
     }
 
     @Override
     public List<NutrientTotal> getNutrientTotals(Date fromDate, Date toDate, UserProfile userProfile) {
+        List<NutrientTotal> list = new ArrayList<>();
         List<Meal> meals = new ArrayList<>();
         List<Meal> rangeMeals = new ArrayList<>();
         List<Date> dates = new ArrayList<>();
         List<MealEntry> mealEntry = new ArrayList<>();
-        
-        
-        NutrientTotal protein = new NutrientTotal(new Nutrient("protein", "grams"), 0.0);
-        
+
+
+        NutrientTotal protein = new NutrientTotal(new Nutrient("protein", "g"), 0.0);
+        NutrientTotal sugar = new NutrientTotal(new Nutrient("sugar", "g"), 0.0);
+        NutrientTotal saturatedFat = new NutrientTotal(new Nutrient("saturatedFat", "g"), 0.0);
+        NutrientTotal sodium = new NutrientTotal(new Nutrient("sodium", "mg"), 0.0);
+        NutrientTotal cholesterol = new NutrientTotal(new Nutrient("cholesterol", "mg"), 0.0);
+        NutrientTotal carbohydrates = new NutrientTotal(new Nutrient("carbohydrates", "g"), 0.0);
+        NutrientTotal fiber = new NutrientTotal(new Nutrient("fiber", "g"), 0.0);
+        NutrientTotal totalFat = new NutrientTotal(new Nutrient("totalFat", "g"), 0.0);
+        //NutrientTotal potassium = new NutrientTotal(new Nutrient("potassium", ""), 0.0);
+        NutrientTotal transFat = new NutrientTotal(new Nutrient("transFat", "g"), 0.0);
+
+
         dates = getListDates(fromDate, toDate);
-        
+
         UserProfile up = userProfile;
-        
+
         meals = up.getMeals();
-        
+
         for(Meal m : meals)
         {
             //Date current = m.getDate();
-            
+
             for(Date d : dates)
             {
                 if(d.getDay() == m.getDate().getDay())
                 {
                     rangeMeals.add(m);
                 }
-  
+
             }
         }
-        
+
         for(Meal m : rangeMeals)
         {
-           for (MealEntry me : m.getMealEntries())
+            for (MealEntry me : m.getMealEntries())
             {
-                  mealEntry.add(me);
+                mealEntry.add(me);
             }
-            
+
         }
-        
+
         for(MealEntry me : mealEntry)
         {
             double chosen = me.getAmount();
             double serving = me.getMenuItem().getServingSize();
             double ratio = chosen / serving;
-            
+
             for(NutrientTotal nt : me.getMenuItem().getNutrients())
             {
                 switch(nt.getNutrient().getName()){
                     case "protein":
                         protein.setAmount( protein.getAmount() + nt.getAmount()*ratio);
                         break;
-                    case "":
-                        
+                    case "sugar":
+                        sugar.setAmount(sugar.getAmount() + nt.getAmount()*ratio);
+                        break;
+                    case "saturatedFat":
+                        saturatedFat.setAmount(saturatedFat.getAmount() + nt.getAmount()*ratio);
+                        break;
+                    case "sodium":
+                        sodium.setAmount(sodium.getAmount() + nt.getAmount()*ratio);
+                        break;
+                    case "cholesterol":
+                        cholesterol.setAmount(cholesterol.getAmount() + nt.getAmount()*ratio);
+                        break;
+                    case "carbohydrates":
+                        carbohydrates.setAmount(carbohydrates.getAmount() + nt.getAmount()*ratio);
+                        break;
+                    case "fiber":
+                        fiber.setAmount(fiber.getAmount() + nt.getAmount()*ratio);
+                        break;
+                    case "totalFat":
+                        totalFat.setAmount(totalFat.getAmount() + nt.getAmount()*ratio);
+                        break;
+                    case "transFat":
+                        transFat.setAmount(transFat.getAmount() + nt.getAmount()*ratio);
+                        break;
+                    default:
+                        System.out.println("This is probably calories");
+                        break;
+
                 }
             }
-            
-            
         }
-        //return list;
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        list.add(sugar); //1
+        list.add(protein); //2
+        list.add(sodium); //3
+        list.add(totalFat); //4
+        list.add(transFat); //5
+        list.add(saturatedFat); //6
+        list.add(fiber); //7
+        list.add(carbohydrates); //8
+        list.add(cholesterol); //9
+
+        return list;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 //    private ArrayList<NutrientTotal> getRDANutrientTotals(int numDays) {
@@ -181,4 +262,115 @@ public class NutrientCalculator implements CalculatorInterface {
         return list;
     }
 
+    public int returnDaysInMonth(int date){
+        int days = 0;
+        switch(date) {
+            case 1:
+                days += 31;
+                break;
+            case 2:
+                days += 28;
+                break;
+            case 3:
+                days += 31;
+                break;
+            case 4:
+                days += 30;
+                break;
+            case 5:
+                days += 31;
+                break;
+            case 6:
+                days += 30;
+                break;
+            case 7:
+                days += 31;
+                break;
+            case 8:
+                days += 31;
+                break;
+            case 9:
+                days += 30;
+                break;
+            case 10:
+                days += 31;
+                break;
+            case 11:
+                days += 30;
+                break;
+            case 12:
+                days += 31;
+                break;
+        }
+        return days;
+    }
+
+    public int returnDays(Date toDate, int num){
+        int total = 0;
+        for (int i = 0; i< num; i++){
+            total += returnDaysInMonth(toDate.getMonth() - (i+1));
+        }
+        return total;
+    }
+
+    public int returnSize(Date fromDate, Date toDate){
+        int size = 1;
+        if(fromDate.getYear() == toDate.getYear()) {
+            if (fromDate.getMonth() == toDate.getMonth()){
+                size = (Math.abs(toDate.getDay() - fromDate.getDay()));
+            }
+            else{
+                switch(Math.abs(toDate.getMonth()- fromDate.getMonth())){
+                    case 1:
+                        size = toDate.getDay() + (returnDaysInMonth(fromDate.getMonth())- fromDate.getDay());
+                        break;
+                    case 2:
+                        size = toDate.getDay() + (returnDaysInMonth(fromDate.getMonth())- fromDate.getDay())
+                                + returnDays(toDate, 1);
+                        break;
+                    case 3:
+                        size = toDate.getDay() + (returnDaysInMonth(fromDate.getMonth())- fromDate.getDay())
+                                + returnDays(toDate, 2);
+                        break;
+                    case 4:
+                        size = toDate.getDay() + (returnDaysInMonth(fromDate.getMonth())- fromDate.getDay())
+                                + returnDays(toDate, 3);
+                        break;
+                    case 5:
+                        size = toDate.getDay() + (returnDaysInMonth(fromDate.getMonth())- fromDate.getDay())
+                                + returnDays(toDate, 4);;
+                        break;
+                    case 6:
+                        size = toDate.getDay() + (returnDaysInMonth(fromDate.getMonth())- fromDate.getDay())
+                                + returnDays(toDate, 5);
+                        break;
+                    case 7:
+                        size = toDate.getDay() + (returnDaysInMonth(fromDate.getMonth())- fromDate.getDay())
+                                + returnDays(toDate, 6);
+                        break;
+                    case 8:
+                        size = toDate.getDay() + (returnDaysInMonth(fromDate.getMonth())- fromDate.getDay())
+                                + returnDays(toDate, 7);
+                        break;
+                    case 9:
+                        size = toDate.getDay() + (returnDaysInMonth(fromDate.getMonth())- fromDate.getDay())
+                                + returnDays(toDate, 8);
+                        break;
+                    case 10:
+                        size = toDate.getDay() + (returnDaysInMonth(fromDate.getMonth())- fromDate.getDay())
+                                + returnDays(toDate, 9);
+                        break;
+                    case 11:
+                        size = toDate.getDay() + (returnDaysInMonth(fromDate.getMonth())- fromDate.getDay())
+                                + returnDays(toDate, 10);
+                        break;
+                    default:
+                        //Won't work for Leap Year Change this later
+                        size = 365- Math.abs(toDate.getDay() - fromDate.getDay());
+                        break;
+                }
+            }
+        }
+        return size;
+    }
 }

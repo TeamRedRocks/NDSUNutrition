@@ -6,7 +6,18 @@ package com.Engine;
  * and open the template in the editor.
  */
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Collections;
 import java.util.Comparator;
@@ -66,8 +77,7 @@ public class StandardAppState implements AppState{
             Collections.sort(mealEntries, new Comparator<MealEntry>() {
 
                 public int compare(MealEntry mealEntry1, MealEntry mealEntry2) {
-
-                    return mealEntry1.getName().compareTo(mealEntry2.getName());
+                    return mealEntry1.getMenuItem().getName().compareTo(mealEntry2.getMenuItem().getName());
                 }
 
             });
@@ -75,7 +85,7 @@ public class StandardAppState implements AppState{
 
     }
 
-    @Override
+    //@Override
     public int compare(Object o, Object t1) {
         return 0;
     }
@@ -130,5 +140,58 @@ public class StandardAppState implements AppState{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public void constructUserProfile() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<MenuItem> constructListOfMenuItems(String venue) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Recommendation> constructRecommendationsList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Venue> constructListVenues() {
+        ArrayList list = new ArrayList<Venue>(3);
+        try {
+            //private static final String sURL = "http//rin.cs.ndsu.nodak.edu:4567/venues/1/meals/";
+
+            JsonParser jp = new JsonParser();
+
+            URL url = new URL("http://rin.cs.ndsu.nodak.edu:4567/venues");
+
+            //String sURL = readUrl("http//rin.cs.ndsu.nodak.edu:4567/venues/1/meals");
+            HttpURLConnection request = (HttpURLConnection) url.openConnection();
+            request.connect();
+
+            System.out.println(request.getErrorStream());
+            Gson gs = new Gson();
+            //Throws IOException?
+            JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
+
+            JsonObject rootobj = root.getAsJsonObject(); //May be an array, may be an object.
+
+            //How to do this?
+            String zipcode = rootobj.get("venues").getAsString();
+            //String test = rootobj.get("protein").getAsString();
+
+            list.add(zipcode);
+
+        } catch (MalformedURLException mfe) {
+            System.out.println(mfe.getMessage() + "This is an error");
+        }
+        catch(IOException ioe){
+
+            System.out.println(ioe.getMessage() + "This is another error");
+            System.out.println(Arrays.toString(ioe.getStackTrace()));
+        }
+        return list;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }

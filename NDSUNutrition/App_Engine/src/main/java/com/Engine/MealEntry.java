@@ -20,16 +20,16 @@ public class MealEntry implements Serializable{
     //Declare Variables
     MenuItem menuItem = new MenuItem();
     double amount;
-    
+
     public MealEntry(MenuItem item, double amount) {
         if(item != null)
             menuItem = item;
-        
+
         if(amount >= 0)
             this.amount = amount;
-        
+
     }
-    
+
     public MenuItem getMenuItem(){
         return menuItem;
     }
@@ -67,22 +67,19 @@ public class MealEntry implements Serializable{
         }
         else
         {
-           MenuItem o = (MenuItem) obj; 
-           
-           double compVal = (menuItem.getServingSize()) - (o.getServingSize());
-           boolean b1 = Math.abs(compVal) <= 0.000001;
-           boolean b2 = menuItem.getCategory().equals(o.getCategory());
-           boolean b3 = menuItem.getInfoSource().equals(o.getInfoSource());
-           boolean b4 = menuItem.getName().equals(o.getName());
-           boolean b5 = menuItem.getServingUnit().equals(o.getServingUnit());
-           boolean b6 = menuItem.getVenue().equals(o.getVenue());
-           
+            MenuItem o = (MenuItem) obj;
+
+            double compVal = (menuItem.getServingSize()) - (o.getServingSize());
+            boolean b1 = Math.abs(compVal) <= 0.000001;
+            boolean b2 = menuItem.getCategory().equals(o.getCategory());
+            boolean b3 = menuItem.getInfoSource().equals(o.getInfoSource());
+            boolean b4 = menuItem.getName().equals(o.getName());
+            boolean b5 = menuItem.getServingUnit().equals(o.getServingUnit());
+            boolean b6 = menuItem.getVenue().equals(o.getVenue());
+
             return (b1 && b2 && b3 && b4 && b5 && b6);
-        
-           
+
+
         }
     }
-
-
-    
 }
