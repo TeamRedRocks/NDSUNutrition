@@ -1,6 +1,7 @@
 package com.redteam.ndsunutrition;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -13,6 +14,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import com.Engine.AppState;
+import com.Engine.StandardAppState;
+import com.google.common.util.concurrent.AsyncFunction;
+import com.google.common.util.concurrent.ListenableFuture;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -36,6 +42,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
+        AppStateThread contentRetriever = new AppStateThread(getApplicationContext());
+        contentRetriever.execute();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

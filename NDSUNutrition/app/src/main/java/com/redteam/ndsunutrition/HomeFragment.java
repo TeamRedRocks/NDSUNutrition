@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,6 +17,14 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.Engine.AppState;
+import com.Engine.StandardAppState;
+import com.Engine.Venue;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class HomeFragment extends Fragment implements AdapterView.OnItemSelectedListener
@@ -54,10 +63,12 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         list.setAdapter(listAdapter);
 
         //Iteration to add elements to the List
-        for(int i = 0; i != 5; i++)
+        for (int i = 0; i != AppStateThread.STATE.getListOfVenues().size(); i++)
         {
-            listAdapter.add("");
+            listAdapter.add(AppStateThread.STATE.getListOfVenues().get(i));
         }
+
+        listAdapter.notifyDataSetChanged();
 
         //Create middle progress bar
         Resources res = getResources();

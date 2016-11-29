@@ -7,12 +7,14 @@ package com.Engine;
  */
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -26,7 +28,7 @@ import java.util.Comparator;
  *
  * @author mitchell.olson.1
  */
-public class StandardAppState implements AppState{
+public class StandardAppState implements AppState, Serializable{
 
     private List<Venue> venues = new ArrayList();
     private List<MenuItem> menuItems = new ArrayList();
@@ -116,9 +118,7 @@ public class StandardAppState implements AppState{
     }
 
     @Override
-    public void setListVenues(List<Venue> venues) {
-         this.venues = venues;
-    }
+    public void setListVenues(List<Venue> venues) {this.venues = venues;}
 
     @Override
     public List<Recommendation> getRecommendationsList() {
@@ -157,7 +157,7 @@ public class StandardAppState implements AppState{
 
     @Override
     public List<Venue> constructListVenues() {
-        ArrayList list = new ArrayList<Venue>(3);
+        ArrayList<Venue> list = new ArrayList();
         try {
             //private static final String sURL = "http//rin.cs.ndsu.nodak.edu:4567/venues/1/meals/";
 
@@ -169,29 +169,39 @@ public class StandardAppState implements AppState{
             HttpURLConnection request = (HttpURLConnection) url.openConnection();
             request.connect();
 
-            System.out.println(request.getErrorStream());
+            //System.out.println(request.getErrorStream());
             Gson gs = new Gson();
             //Throws IOException?
             JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
 
-            JsonObject rootobj = root.getAsJsonObject(); //May be an array, may be an object.
+            JsonObject rootObj = root.getAsJsonObject(); //May be an array, may be an object.
+
+            //Checks if the Json object contains anything and iterates through to seperate each name
+            if(rootObj.has("venues"))
+            {
+                for(int i = 0; i < rootObj.getAsJsonArray("venues").size();i++)
+                {
+                    //Creates a new venue item for each of the json objects. Uses substring to extract the name.
+                    list.add(new Venue(rootObj.getAsJsonArray("venues").get(i).toString().substring(rootObj.getAsJsonArray("venues").get(i).toString().lastIndexOf(":")+2,rootObj.getAsJsonArray("venues").get(i).toString().lastIndexOf("\""))));
+                }
+            }
 
             //How to do this?
-            String zipcode = rootobj.get("venues").getAsString();
-            //String test = rootobj.get("protein").getAsString();
+           // String zipcode = rootobj.getAsString();
+           // String test = rootobj.get("protein").getAsString();
 
-            list.add(zipcode);
+            //list.add(zipcode);
 
         } catch (MalformedURLException mfe) {
             System.out.println(mfe.getMessage() + "This is an error");
         }
-        catch(IOException ioe){
+        catch(IOException ioe) {
 
             System.out.println(ioe.getMessage() + "This is another error");
             System.out.println(Arrays.toString(ioe.getStackTrace()));
         }
-        return list;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return list;
     }
 
 }
