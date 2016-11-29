@@ -142,7 +142,7 @@ public class StandardAppState implements AppState{
 
     @Override
     public void constructUserProfile() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         StandardUserProfile stp = new StandardUserProfile();
     }
 
     @Override

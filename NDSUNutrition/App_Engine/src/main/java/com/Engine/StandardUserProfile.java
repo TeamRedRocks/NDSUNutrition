@@ -26,7 +26,12 @@ public class StandardUserProfile implements UserProfile {
 
     public StandardUserProfile()
     {
-        //Empty constructor to solve so errors cause by MealEntry. This is only temporary.
+        age = 21;
+        weight  = 155;
+        height = 69;
+        gender = 'm';
+        activityLevel = 5;
+
     }
 
     public StandardUserProfile(int calories, List<Meal> meals) {
