@@ -19,6 +19,7 @@ import org.junit.Test;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -42,7 +43,7 @@ public class StandardAppStateTest {
     }
 
     @Test
-    public void getListMenuItems_OneItem()
+    public void testGetListMenuItems()
     {
         List<NutrientTotal> nutrientList = new ArrayList<>();
         MenuItem m1 = new MenuItem("Spaghetti", 50.0, "ounces", nutrientList, "Entree", "Google.com", "Johnny Carinos");
@@ -59,47 +60,7 @@ public class StandardAppStateTest {
     }
 
     @Test
-    public void getListMenuItems_PandaExpress()
-    {
-        //testState.constructListOfMenuItems("Panda Express");
-        fail();
-
-        int expected = 46;
-        int actual = testState.getListMenuItems().size();
-
-        assertEquals(expected, actual);
-
-    }
-
-    @Test
-    public void getListMenuItems_PizzaHut()
-    {
-        //testState.constructListOfMenuItems("Pizza Hut");
-        fail();
-
-        int expected = 0;
-        int actual = testState.getListMenuItems().size();
-
-        assertEquals(expected, actual);
-
-    }
-
-    @Test
-    public void getListMenuItems_Nonexisting()
-    {
-        //testState.constructListOfMenuItems("Test 1");
-        fail();
-
-        List<MenuItem> expected = null;
-
-        List<MenuItem> actual = testState.getListMenuItems();
-
-        assertEquals(expected, actual);
-
-    }
-
-    @Test
-    public void setListOfMenuItems()
+    public void testSetListOfMenuItems()
     {
         List<NutrientTotal> nutrientList = new ArrayList<>();
         MenuItem m1 = new MenuItem("Spaghetti", 50.0, "ounces", nutrientList, "Entree", "Google.com", "Johnny Carinos");
@@ -109,11 +70,13 @@ public class StandardAppStateTest {
         testState.setListOfMenuItems(testList);
     }
 
+
+
     @Test
-    public void constructListOfMenuItems_PandaExpress()
+    public void testConstructListOfMenuItems_PandaExpress()
     {
-        //testState.constructListOfMenuItems("Panda Express");
-        fail();
+        testState.constructListOfMenuItems("Panda Express");
+
 
         int expected = 46;
         int actual = testState.getListMenuItems().size();
@@ -122,15 +85,30 @@ public class StandardAppStateTest {
 
     }
 
-    @Test(expected=IllegalArgumentException.class)
-    public void constructListOfMenuItems_Invalid()
+    @Test
+    public void testConstructListOfMenuItems_PizzaHut()
     {
-        //testState.constructListOfMenuItems("Test 1");
-        fail();
+        testState.constructListOfMenuItems("Pizza Hut");
+
+
+        int expected = 0;
+        int actual = testState.getListMenuItems().size();
+
+        assertEquals(expected, actual);
+
+    }
+
+
+
+    @Test(expected=IllegalArgumentException.class)
+    public void constructListOfMenuItems_Nonexisting()
+    {
+        testState.constructListOfMenuItems("Test 1");
+
     }
 
     @Test
-    public void getUserProfile()
+    public void testGetUserProfile()
     {
         //set profile
         UserProfile testProfile = new StandardUserProfile();
@@ -146,7 +124,7 @@ public class StandardAppStateTest {
     }
 
     @Test
-    public void setUserProfile()
+    public void testSetUserProfile()
     {
         UserProfile testProfile = new StandardUserProfile();
         testProfile.setRecommendedCalories(2500);
@@ -155,14 +133,14 @@ public class StandardAppStateTest {
     }
 
     @Test
-    public void constructUserProfile()
+    public void testConstructUserProfile()
     {
-        //testState.constructUserProfile();
-        fail();
+        testState.constructUserProfile();
+
     }
 
     @Test
-    public void getListOfVenues()
+    public void testGetListOfVenues()
     {
         Venue venue1 = new Venue("Panda Express");
         Venue venue2 = new Venue("Pizza Hut");
@@ -180,7 +158,7 @@ public class StandardAppStateTest {
     }
 
     @Test
-    public void setListVenues()
+    public void testSetListVenues()
     {
         Venue venue1 = new Venue("Panda Express");
         Venue venue2 = new Venue("Pizza Hut");
@@ -192,14 +170,17 @@ public class StandardAppStateTest {
     }
 
     @Test
-    public void constructListVenues()
+    public void testConstructListVenues()
     {
-        //testState.constructListVenues();
-        fail();
+        testState.constructListVenues();
+        Venue expected = new Venue("Panda Express");
+        Venue actual = testState.getListOfVenues().get(0);
+
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void getRecommendationsList()
+    public void testGetRecommendationsList()
     {
         Nutrient protein = new Nutrient("Protein", "grams");
         Recommendation r1 = new Recommendation("Low in sodium", "Eat food with salt in it.", "Test", protein);
@@ -213,7 +194,7 @@ public class StandardAppStateTest {
     }
 
     @Test
-    public void setRecommendationsList()
+    public void testSetRecommendationsList()
     {
         Nutrient protein = new Nutrient("Protein", "grams");
         Recommendation r1 = new Recommendation("Low in sodium", "Eat food with salt in it.", "Test", protein);
@@ -226,23 +207,23 @@ public class StandardAppStateTest {
 
 
     @Test
-    public void constructRecommendationList()
+    public void testConstructRecommendationsList()
     {
-        //testState.constructRecommendationList();
-        fail();
+        testState.constructRecommendationsList();
+
     }
 
     @Test
-    public void getSystemTime()
+    public void testGetSystemTime()
     {
-        Date expected = new MealDate(11,19,2016,9,7);
-        Date actual = testState.getSystemTime();
+        int dayExpected = Calendar.DAY_OF_MONTH;
+        int dayActual = testState.getSystemTime().getDay();
 
-        assertEquals(expected.getMinute(), actual.getMinute());
+        assertEquals(dayExpected, dayActual);
     }
 
     @Test
-    public void sortMenuItems()
+    public void testSortMenuItems()
     {
         //StandardMenuItem expected = new StandardMenuItem(“Chicken Egg Roll”, 2.75, “ounces”, new List<Nutrient> (), “Appetizer”, “Panda Express website”, “Panda Express”);
 
@@ -252,8 +233,8 @@ public class StandardAppStateTest {
         MenuItem expected = new MenuItem("Chicken Egg Roll", 2.75, "ounces",
                 new ArrayList<NutrientTotal>(), "Appetizer", "Panda Express website", "Panda Express");
 
-        //testState.constructListOfMenuItems("Panda Express");
-        fail();
+        testState.constructListOfMenuItems("Panda Express");
+
 
         List<MenuItem> testList = testState.getListMenuItems();
         testState.sortMenuItems();
@@ -264,11 +245,11 @@ public class StandardAppStateTest {
     }
 
     @Test
-    public void sortVenues()
+    public void testSortVenues()
     {
-        Venue expected = new Venue("Panda Express");
-        //testState.constructListVenues();
-        fail();
+        Venue expected = new Venue("McDonalds");
+        testState.constructListVenues();
+
 
         testState.sortVenues();
         Venue actual = testState.getListOfVenues().get(0);
@@ -276,7 +257,7 @@ public class StandardAppStateTest {
     }
 
     @Test
-    public void sortMeals()
+    public void testSortMeals()
     {
 
         List<MealEntry> l1 = new ArrayList<>();
@@ -302,7 +283,7 @@ public class StandardAppStateTest {
     }
 
     @Test
-    public void exportUserProfileTo()
+    public void testExportUserProfileTo()
     {
         testState.exportUserProfileTo("TestExport");
 
