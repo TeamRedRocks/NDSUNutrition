@@ -157,51 +157,46 @@ public class StandardAppState implements AppState, Serializable{
 
     @Override
     public List<Venue> constructListVenues() {
-        ArrayList<Venue> list = new ArrayList();
+        List<Venue> venueList = new ArrayList<>();
         try {
-            //private static final String sURL = "http//rin.cs.ndsu.nodak.edu:4567/venues/1/meals/";
+            String sURL = "http://rin.cs.ndsu.nodak.edu:4567/venues"; //just a string (grab all meals from pex)
 
-            JsonParser jp = new JsonParser();
-
-            URL url = new URL("http://rin.cs.ndsu.nodak.edu:4567/venues");
-
-            //String sURL = readUrl("http//rin.cs.ndsu.nodak.edu:4567/venues/1/meals");
+            // Connect to the URL using java's native library
+            URL url = new URL(sURL);
             HttpURLConnection request = (HttpURLConnection) url.openConnection();
             request.connect();
 
-            //System.out.println(request.getErrorStream());
-            Gson gs = new Gson();
-            //Throws IOException?
-            JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
+            // Convert to a JSON object to print data
+            JsonParser jp = new JsonParser(); //from gson
+            JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent())); //Convert the input stream to a json element
+            JsonObject rootobj = root.getAsJsonObject(); //May be an array, may be an object.
 
-            JsonObject rootObj = root.getAsJsonObject(); //May be an array, may be an object.
+            // lets print how many meals we got
+            int c = rootobj.get("count").getAsInt(); //just grab the count of meals from pex
+            System.out.println("Total venues: " + c);
 
-            //Checks if the Json object contains anything and iterates through to seperate each name
-            if(rootObj.has("venues"))
-            {
-                for(int i = 0; i < rootObj.getAsJsonArray("venues").size();i++)
-                {
-                    //Creates a new venue item for each of the json objects. Uses substring to extract the name.
-                    list.add(new Venue(rootObj.getAsJsonArray("venues").get(i).toString().substring(rootObj.getAsJsonArray("venues").get(i).toString().lastIndexOf(":")+2,rootObj.getAsJsonArray("venues").get(i).toString().lastIndexOf("\""))));
-                }
+            // lets get and print a list of meals
+            JsonArray mealsJson = rootobj.getAsJsonArray("venues");
+            String[] names = new String[mealsJson.size()];
+
+            for (int i = 0; i < mealsJson.size(); i++) {
+                names[i] = mealsJson.get(i).getAsJsonObject().get("name").getAsString();
             }
 
-            //How to do this?
-           // String zipcode = rootobj.getAsString();
-           // String test = rootobj.get("protein").getAsString();
+            for (int i = 0; i < names.length; i++){
+                venueList.add(i, new Venue(names[i].toString()));
+            }
 
-            //list.add(zipcode);
-
-        } catch (MalformedURLException mfe) {
-            System.out.println(mfe.getMessage() + "This is an error");
         }
-        catch(IOException ioe) {
-
-            System.out.println(ioe.getMessage() + "This is another error");
-            System.out.println(Arrays.toString(ioe.getStackTrace()));
+        catch(MalformedURLException mue){
+            System.out.println("MalfromedURLException");
+            System.out.println("Exception:" + mue.getMessage());
         }
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        return list;
+        catch(IOException ioe){
+            System.out.println("IOException");
+            System.out.println("Exception:" + ioe.getMessage());
+        }
+        return venueList;
     }
 
 }
