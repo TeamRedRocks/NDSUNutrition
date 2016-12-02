@@ -1,7 +1,9 @@
 package com.redteam.ndsunutrition;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,7 +31,7 @@ public class PickRestaurantActivity extends AppCompatActivity
     private RadioButton radioButtonAM;
     private RadioButton radioButtonPM;
     private ArrayAdapter<String> adapter;
-    private ArrayList<String> restaurants;
+    private List<Venue> restaurants;
     private CalendarSpinnerAdapter mSpinnerDateAdapter;
     private Meal meal;
     private MealDate mealDate;
@@ -46,8 +48,10 @@ public class PickRestaurantActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_restaurant);
 
+        // Get the intent from previous activity
         Intent intent = getIntent();
 
+        // Set up GUI components
         invalidTextView = (TextView) findViewById(R.id.textViewInvalidRestaurant);
         invalidTextView.setVisibility(View.INVISIBLE);
         restaurantSpinner = (Spinner) findViewById(R.id.spinnerRestaurants);
@@ -57,6 +61,7 @@ public class PickRestaurantActivity extends AppCompatActivity
         radioButtonPM = (RadioButton) findViewById(R.id.radioButtonPM);
         meal = new Meal();
 
+        // Methods to set up the data for the activity
         setCurrentTime();
         getRestaurants();
         addItemSelectedListenerToSpinner();
@@ -211,6 +216,8 @@ public class PickRestaurantActivity extends AppCompatActivity
             }
         }
     }
+
+    // Hides the invalid selection text whe the user selects a valid item
     private void addItemSelectedListenerToSpinner()
     {
         restaurantSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
@@ -233,13 +240,16 @@ public class PickRestaurantActivity extends AppCompatActivity
         });
     }
 
+    // Sets up the date spinner
     private void setUpDateSpinner()
     {
+        // Get a new CalendarSpinnerAdapter with 30 days
         mSpinnerDateAdapter = new CalendarSpinnerAdapter(PickRestaurantActivity.this, Calendar.getInstance(), 30);
         spinnerDate.setAdapter(mSpinnerDateAdapter);
 
         spinnerDate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
+            // Handles when the user selects an item on the spinner
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
@@ -251,37 +261,41 @@ public class PickRestaurantActivity extends AppCompatActivity
             @Override
             public void onNothingSelected(AdapterView<?> parent)
             {
-
+                // Dont do anything here
             }
 
         });
 
-        spinnerDate.setSelection(29);
+        spinnerDate.setSelection(29);// Set to the current day by default
     }
 
     // Populates restaurantSpinner with a list of restaurants
-    private void getRestaurants()
-    {
-        // Will need to get the list of available restaurants
-        // Potentially in the form of a string array
+    private void getRestaurants() {
+        // Retrieve available venues
+        restaurants = MainActivity.contentRetriever.STATE.getListOfVenues();
+        ArrayList<String> venues = new ArrayList<>();
+        venues.add("Select One");
 
-        restaurants = new ArrayList<>();
+        // Populate the ArrayList with the names of the venues
+        for(int i = 0; i < restaurants.size(); i++)
+        {
+            venues.add(restaurants.get(i).getName());
+        }
 
-        // Dummy data, we will use the API to populate the list beforehand
-        restaurants.add("Select One");
-        restaurants.add("Panda Express");
-        restaurants.add("Some Other Restaurant");
-
-        // Adapt the string array to be used by the spinner
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, restaurants);
+        // Adapt the venue list to be used by the spinner
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, venues);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         // Link restaurantSpinner to our adapter
         restaurantSpinner.setAdapter(adapter);
     }
 
+    // Parses the selected date and time to set the MealDate object
     private MealDate parseDateTime()
     {
+        // Get the selected date from spinnerDate
         Calendar date = (Calendar) spinnerDate.getSelectedItem();
+        // Split the time spinners value into hours and minutes
         String[] time = spinnerTime.getSelectedItem().toString().split(":");
         int month = date.get(Calendar.MONTH);
         int day = date.get(Calendar.DAY_OF_MONTH);
@@ -289,6 +303,7 @@ public class PickRestaurantActivity extends AppCompatActivity
         int hr;
         int min;
 
+        // Check if its AM or PM and change the value of the hour accordingly
         if(radioButtonPM.isChecked())
         {
             hr = Integer.parseInt(time[0]) + 12;
@@ -299,6 +314,7 @@ public class PickRestaurantActivity extends AppCompatActivity
 
         min = Integer.parseInt(time[1]);
 
+        // Return a new MealDate object with the parsed fields
         return new MealDate(year, month, day, hr, min);
     }
 
@@ -320,6 +336,7 @@ public class PickRestaurantActivity extends AppCompatActivity
             venue = new Venue(selection);
             mealDate = this.parseDateTime();
 
+            // Create a new Meal object and set its Venue and Date attributes
             meal = new Meal();
             meal.setLocation(venue);
             meal.setDate(mealDate);

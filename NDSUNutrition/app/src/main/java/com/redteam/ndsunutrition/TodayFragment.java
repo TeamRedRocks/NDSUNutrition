@@ -38,6 +38,7 @@ public class TodayFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_today, container, false);
 
+        // Set up GUI elements
         mealsTextView = (TextView) rootView.findViewById(R.id.textViewMeals);
         ListView list = (ListView) rootView.findViewById(R.id.meal_list);
         MealsAdapter listAdapter = new MealsAdapter(getContext(), R.layout.fragment_meal_item);

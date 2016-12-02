@@ -41,16 +41,22 @@ public class ReviewMealActivity extends AppCompatActivity
 
         Intent intent = getIntent();
 
+        // Get the Meal item from the previous activity
         meal = (Meal) intent.getSerializableExtra("Meal items");
         reviewLinearLayout = (LinearLayout) findViewById(R.id.linearLayoutReview);
         this.showMealInfo();
     }
 
+    // Displays the meal information neatly
     private void showMealInfo() {
         String ampm;
         String minute;
+
+        // Format the date
         mealDate = (MealDate) meal.getDate();
         String date = (mealDate.getMonth() + 1) + "/" + mealDate.getDay() + "/" + mealDate.getDay();
+
+        // Format the hours into a 12 hour format
         int hour = mealDate.getHour();
         if (hour > 12)
         {
@@ -81,11 +87,11 @@ public class ReviewMealActivity extends AppCompatActivity
             minute = "30";
         }
 
+        // Format the time
         String time = hour + ":" + minute + " " + ampm;
 
-        /*
-        Add text views for the other meal attributes to the LinearLayout
-         */
+
+        // Add text views for the meal attributes to the LinearLayout
         TextView locationTextView = new TextView(this);
         locationTextView.setText("Location: " + meal.getLocation().getName());
         locationTextView.setTextColor(Color.BLACK);
@@ -116,6 +122,7 @@ public class ReviewMealActivity extends AppCompatActivity
 
     }
 
+    // Submits the meal and returns the user to the MainActivity
     public void submitMeal(View view)
     {
         //Send meal info to phone database here

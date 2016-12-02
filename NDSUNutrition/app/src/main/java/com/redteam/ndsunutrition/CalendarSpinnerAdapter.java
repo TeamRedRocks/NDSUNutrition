@@ -12,21 +12,22 @@ import java.util.Calendar;
 
 /**
  * Created by gage.askegard on 10/29/2016.
+ * This is an adapter class to display a range of dates in a spinner
  */
 public class CalendarSpinnerAdapter extends BaseAdapter
 {
     private SimpleDateFormat mDateFormat = new SimpleDateFormat("MM/d/yyyy");
-
     private LayoutInflater mInflater;
     private Calendar mCalendar;
     private int mDayCount;
     private int mLastRequestedDay = 0;
 
+    // Creates a list of calendar days starting from the current day up through dayCount + current day
     public CalendarSpinnerAdapter(Context context, Calendar startDate, int dayCount) {
         mInflater = LayoutInflater.from(context);
         mDayCount = dayCount;
         mCalendar = Calendar.getInstance();
-        mCalendar.add(Calendar.DAY_OF_YEAR, -29);
+        mCalendar.add(Calendar.DAY_OF_YEAR, -29);// Get the past 29 days
     }
 
     @Override
@@ -46,6 +47,7 @@ public class CalendarSpinnerAdapter extends BaseAdapter
         return position;
     }
 
+    // Returns the view for the values of the date spinner
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {

@@ -12,8 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.Engine.Meal;
+import com.Engine.MealEntry;
+import com.Engine.MenuItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MenuItemActivity extends AppCompatActivity
 {
@@ -25,6 +28,8 @@ public class MenuItemActivity extends AppCompatActivity
     private ArrayAdapter<String> adapter;
     private ArrayList<String> menuItems;
     private ArrayList<String> mealItems;
+    private List<MealEntry> mealEntries;
+    private List<MenuItem> items;
     private Meal meal;
 
     @Override
@@ -34,8 +39,11 @@ public class MenuItemActivity extends AppCompatActivity
         setContentView(R.layout.activity_menu_item);
 
         Intent intent = getIntent();
+
+        // Get the Meal object from the previous activity
         meal = (Meal) intent.getSerializableExtra(PickRestaurantActivity.EXTRA_MESSAGE);
 
+        // Initialize GUI features
         menuTextView = (TextView) findViewById(R.id.textViewPickMeal);
         invalidTextView = (TextView) findViewById(R.id.textViewInvalidItem);
         invalidTextView.setVisibility(View.INVISIBLE);
@@ -45,10 +53,12 @@ public class MenuItemActivity extends AppCompatActivity
 
         mealItems = new ArrayList<>();
 
+        // Get the menu items for the selected restaurant
         getMenuItems(meal.getLocation().getName());
         addItemSelectedListenerToSpinner();
     }
 
+    // Checks if the user selected an actual menu item so it can hide the invalidTextView if its shown
     private void addItemSelectedListenerToSpinner()
     {
         menuItemSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
@@ -71,14 +81,28 @@ public class MenuItemActivity extends AppCompatActivity
         });
     }
 
+    // Gets the menu items for the selected restaurant
     private void getMenuItems(String restaurant)
     {
+        // Stub for when getting menu items is implemented
+        //items = MainActivity.contentRetriever.STATE.getListMenuItems();
+
         menuItems = new ArrayList<>();
         menuItems.add("Select One");
-        // Will need to get the list of available menu items based on the value of restaurant
-        // Potentially in the form of a string array
 
-        //We will do this a different way once we have the API
+        // Stub for when getting menu items is implemented
+        /*for (int i = 0; i < items.size(); i++)
+        {
+            menuItems.add(items.get(i).getName());
+        }
+        // Adapt the string array to be used by the spinner
+            adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, menuItems);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            // Link restaurantSpinner to our adapter
+            menuItemSpinner.setAdapter(adapter);
+            */
+
+        //We will do this a different way once we have the API and this can all be deleted
         if(restaurant.equals("Panda Express"))
         {
             // Add dummy data
@@ -108,10 +132,13 @@ public class MenuItemActivity extends AppCompatActivity
         }
     }
 
+    // Adds a MealEntry to the meanEntries list
     public void addMealItem(View view)
     {
+        // Set up the toast for when an item is successfully added
         Toast toast;
         toast = Toast.makeText(getApplicationContext(), "Item Added!", Toast.LENGTH_SHORT);
+
         // Show the invalid TextView if the user tries to submit the default value
         if(menuItemSpinner.getSelectedItem().toString().equals("Select One"))
         {
@@ -119,12 +146,18 @@ public class MenuItemActivity extends AppCompatActivity
         }
         else
         {
+            // Uncomment when MealEntries are supported
+            //mealEntries.add(new MealEntry(menuItem, 1));
+
             mealItems.add(menuItemSpinner.getSelectedItem().toString());
             noItemsTextView.setVisibility(View.INVISIBLE);
+
+            // Notify the user they added an item
             toast.show();
         }
     }
 
+    // Sends an intent to the ReviewMealActivity
     public void reviewMeal(View view)
     {
         // Show the invalid TextView if the user tries to submit the default value
@@ -140,6 +173,10 @@ public class MenuItemActivity extends AppCompatActivity
             {
                 mealItemsArray[i] = mealItems.get(i);
             }
+            // Uncomment when meal entries supported
+            //meal.setMealEntries(mealEntries);
+
+            // Pass the updated Meal object to the next activity
             Intent intent = new Intent(this, ReviewMealActivity.class);
             intent.putExtra("Meal items", meal);
             startActivity(intent);

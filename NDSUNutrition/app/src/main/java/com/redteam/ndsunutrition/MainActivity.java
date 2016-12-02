@@ -64,9 +64,11 @@ public class MainActivity extends AppCompatActivity
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
     }
 
+    // FAB onClick method that starts the restaurant meal addition process
     public void addItem(View view)
     {
-        Intent intent = new Intent(this, AddItemActivity.class);
+        // Send intent to PickRestaurantActivity and start it
+        Intent intent = new Intent(this, PickRestaurantActivity.class);
         startActivity(intent);
     }
 
