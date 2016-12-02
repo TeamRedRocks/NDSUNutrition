@@ -23,7 +23,7 @@ public class AppStateThread extends AsyncTask <Void,Void,Void> {
     @Override
     protected Void doInBackground(Void... params) {
 
-        STATE.constructListVenues();
+        STATE.setListVenues(STATE.constructListVenues());
 
         return null;
     }
