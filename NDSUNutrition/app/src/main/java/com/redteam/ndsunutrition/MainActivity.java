@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity
      */
     public final static String EXTRA_MESSAGE = "com.redteam.viewpagerdemo.MESSAGE";
     private SectionsPagerAdapter mSectionsPagerAdapter;
+    public static AppStateThread contentRetriever;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
 
-        AppStateThread contentRetriever = new AppStateThread(getApplicationContext());
+        contentRetriever = new AppStateThread(getApplicationContext());
         contentRetriever.execute();
 
         super.onCreate(savedInstanceState);

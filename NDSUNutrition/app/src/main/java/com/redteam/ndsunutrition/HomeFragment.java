@@ -8,11 +8,13 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -22,6 +24,8 @@ import android.widget.Toast;
 import com.Engine.AppState;
 import com.Engine.StandardAppState;
 import com.Engine.Venue;
+
+import org.apache.tools.ant.Main;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,10 +50,10 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         return homeFragment;
     }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState)
     {
         //The current fragment
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         //Create reference to Spinner and setup adapter
         Spinner selectionSpinner = (Spinner) rootView.findViewById(R.id.selectionSpinner);
@@ -62,18 +66,45 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         RecommendationAdapter listAdapter = new RecommendationAdapter(getContext(),R.layout.fragment_recommendation_item);
         list.setAdapter(listAdapter);
 
-        //Iteration to add elements to the List
-        for (int i = 0; i != AppStateThread.STATE.getListOfVenues().size(); i++)
+        //Iteration to add elements to the List. Currently displays venues, but will eventually display the recommendations.
+        for (int i = 0; i != MainActivity.contentRetriever.STATE.getListOfVenues().size(); i++)
         {
-            listAdapter.add(AppStateThread.STATE.getListOfVenues().get(i));
+            listAdapter.add(MainActivity.contentRetriever.STATE.getListOfVenues().get(i));
         }
 
-        listAdapter.notifyDataSetChanged();
+
+        //Creates the button and adds action listener to it
+        final Button reloadPage = (Button) rootView.findViewById(R.id.reloadHomePage);
+        if(MainActivity.contentRetriever.getStatus() == AsyncTask.Status.RUNNING)
+        {
+            reloadPage.setVisibility(View.VISIBLE);
+            reloadPage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    //Creates new list to replace the one that was empty. Cannot reference non-final objects outside of loop.
+                    ListView list = (ListView) rootView.findViewById(R.id.recommendationList);
+                    RecommendationAdapter newListAdapter = new RecommendationAdapter(getContext(),R.layout.fragment_recommendation_item);
+                    list.setAdapter(newListAdapter);
+
+                    //Iteration to add elements to the List. Currently displays venues, but will eventually display the recommendations.
+                    for (int i = 0; i != MainActivity.contentRetriever.STATE.getListOfVenues().size(); i++)
+                    {
+                        newListAdapter.add(MainActivity.contentRetriever.STATE.getListOfVenues().get(i));
+                    }
+                    reloadPage.setVisibility(View.GONE);
+                }
+            });
+        }
+        else
+        {
+
+        }
 
         //Create middle progress bar
         Resources res = getResources();
         Drawable drawable = res.getDrawable(R.drawable.circular);
-        final ProgressBar mProgress = (ProgressBar) rootView.findViewById(R.id.circularProgressbar);
+        ProgressBar mProgress = (ProgressBar) rootView.findViewById(R.id.circularProgressbar);
         int progress = 4000;
 
         //Temp code to show progress bar is working
