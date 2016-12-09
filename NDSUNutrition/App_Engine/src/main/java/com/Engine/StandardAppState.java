@@ -141,8 +141,9 @@ public class StandardAppState implements AppState, Serializable{
     }
 
     @Override
-    public void constructUserProfile() {
-         StandardUserProfile stp = new StandardUserProfile();
+    public void constructUserProfile()
+    {
+        StandardUserProfile stp = new StandardUserProfile();
     }
 
     @Override

@@ -98,7 +98,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         }
         else
         {
-
+            reloadPage.setVisibility(View.INVISIBLE);
         }
 
         //Create middle progress bar

@@ -6,6 +6,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.Engine.AppState;
+import com.Engine.NutrientCalculator;
 import com.Engine.StandardAppState;
 
 
@@ -16,12 +17,14 @@ import com.Engine.StandardAppState;
 public class AppStateThread extends AsyncTask <Void,Integer,Void> {
 
     public AppState STATE;
+    public NutrientCalculator CALC;
     private Context context;
 
 
     public AppStateThread(Context context)
     {
         STATE = new StandardAppState();
+        CALC = new NutrientCalculator();
         this.context = context;
     }
 
@@ -33,7 +36,7 @@ public class AppStateThread extends AsyncTask <Void,Integer,Void> {
         //The commented out methods are currently not implemented.
         STATE.setListVenues(STATE.constructListVenues());
         publishProgress(25);
-        //STATE.setUserProfile(STATE.constructUserProfile());
+        //CALC.someMethod();
         publishProgress(50);
         //STATE.setListOfMenuItems(STATE.constructListOfMenuItems());
         publishProgress(75);
