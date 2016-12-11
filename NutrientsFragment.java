@@ -8,11 +8,18 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.Engine.Nutrient;
+import com.Engine.NutrientCalculator;
+import com.Engine.StandardRecommendedDailyAllowance;
+
 /**
  * created by Connor Fradenburgh on 10/24/2106
  */
 public class NutrientsFragment extends Fragment
 {
+
+
+
     //create TextView objects for each of the tracked nutrients (i.e. "100/200 calories")
     private TextView calText;
     private TextView totFatText;
@@ -26,26 +33,26 @@ public class NutrientsFragment extends Fragment
     private TextView potassText; //potassium
 
     //create variables for counted daily nutrients and required daily nutrients
-    private int dailyCal = 10;
-    private int recCal = 20; //rec = recommended
-    private int dailyTotFat = 0;
-    private int recTotFat = 0;
-    private int dailySatFat = 0;
-    private int recSatFat = 0;
-    private int dailyChol = 0;
-    private int recChol = 0;
-    private int dailySodium = 0;
-    private int recSodium = 0;
-    private int dailyTotCarbs = 0;
-    private int recTotCarbs = 0;
-    private int dailyDietFib = 0;
-    private int recDietFib = 0;
-    private int dailySugar = 0;
-    private int recSugar = 0;
-    private int dailyProtein = 0;
-    private int recProtein = 0;
-    private int dailyPotass = 0;
-    private int recPotass = 0;
+    private int dailyCal = 600;
+    private int recCal = StandardRecommendedDailyAllowance.getCALORIES_STANDARD(); //rec = recommended
+    private int dailyTotFat = 23;
+    private int recTotFat = StandardRecommendedDailyAllowance.getTOTALFAT_STANDARD();
+    private int dailySatFat = 12;
+    private int recSatFat = StandardRecommendedDailyAllowance.getSATURATEDFAT_STANDARD();
+    private int dailyChol = 32;
+    private int recChol = StandardRecommendedDailyAllowance.getCHOLESTEROL_STANDARD();
+    private int dailySodium = 300;
+    private int recSodium = StandardRecommendedDailyAllowance.getSODIUM_STANDARD();
+    private int dailyTotCarbs = 40;
+    private int recTotCarbs = StandardRecommendedDailyAllowance.getTOTALCARB_STANDARD();
+    private int dailyDietFib = 6;
+    private int recDietFib = StandardRecommendedDailyAllowance.getDIETARYFIBER_STANDARD();
+    private int dailySugar = 16;
+    private int recSugar = StandardRecommendedDailyAllowance.getSUGAR_STANDARD();
+    private int dailyProtein = 10;
+    private int recProtein = StandardRecommendedDailyAllowance.getPROTEIN_STANDARD();
+    private int dailyPotass = 12;
+    private int recPotass = StandardRecommendedDailyAllowance.getPOTASSIUM_STANDARD();
 
     //create variables for each of the progess bars
     private ProgressBar caloriesProgress;
