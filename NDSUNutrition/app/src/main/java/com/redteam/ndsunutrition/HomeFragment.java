@@ -57,7 +57,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
         //Create reference to Spinner and setup adapter
         Spinner selectionSpinner = (Spinner) rootView.findViewById(R.id.selectionSpinner);
-        ArrayAdapter spinnerAdapter = ArrayAdapter.createFromResource(getContext(),R.array.catagory_selection,android.R.layout.simple_spinner_item); // using time Array as a placeholder
+        ArrayAdapter spinnerAdapter = ArrayAdapter.createFromResource(getContext(),R.array.catagory_selection,android.R.layout.simple_spinner_item);
         selectionSpinner.setAdapter(spinnerAdapter);
         selectionSpinner.setOnItemSelectedListener(this);
 
@@ -65,6 +65,18 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         ListView list = (ListView) rootView.findViewById(R.id.recommendationList);
         RecommendationAdapter listAdapter = new RecommendationAdapter(getContext(),R.layout.fragment_recommendation_item);
         list.setAdapter(listAdapter);
+
+        //Following code is for Demonstration purposes only.
+
+        /*final Button reloadPage = (Button) rootView.findViewById(R.id.reloadHomePage);
+        reloadPage.setVisibility(View.INVISIBLE);
+
+        for(int i = 0; i != 3; i++)
+        {
+            listAdapter.add(""); //Adds a placeholder to the list
+        }*/
+
+        //The following code is used to populate the list view with data from the database (Currently uses Venues for testing). Excluded for Demonstration.
 
         //Iteration to add elements to the List. Currently displays venues, but will eventually display the recommendations.
         for (int i = 0; i != MainActivity.contentRetriever.STATE.getListOfVenues().size(); i++)
@@ -75,6 +87,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
         //Creates the button and adds action listener to it
         final Button reloadPage = (Button) rootView.findViewById(R.id.reloadHomePage);
+
         if(MainActivity.contentRetriever.getStatus() == AsyncTask.Status.RUNNING)
         {
             reloadPage.setVisibility(View.VISIBLE);
@@ -105,7 +118,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         Resources res = getResources();
         Drawable drawable = res.getDrawable(R.drawable.circular);
         ProgressBar mProgress = (ProgressBar) rootView.findViewById(R.id.circularProgressbar);
-        int progress = 4000;
+        int progress = 600;
 
         //Temp code to show progress bar is working
         mProgress.setMax(4000); // Maximum Progress

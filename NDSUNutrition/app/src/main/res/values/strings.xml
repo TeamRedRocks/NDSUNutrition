@@ -30,7 +30,7 @@
     <string name="submit_meal">Submit Meal</string>
     <string-array name="catagory_selection">
         <item>Calories</item>
-        <item>Other</item>
+        <item>Not Yet Implemented...</item>
     </string-array>
     <string-array name="time_array">
         <item>01:00</item>

@@ -1,60 +1,67 @@
 package com.Engine;
 
+import java.util.List;
+
 /**
  *
  * @author donovan.beckmann
  */
-public class StandardRecommendedDailyAllowance {
-    private final int CALORIES_STANDARD = 2000;
-    private final int TOTALFAT_STANDARD = 65;
-    private final int SATURATEDFAT_STANDARD = 20;
-    private final int CHOLESTEROL_STANDARD = 300;
-    private final int SODIUM_STANDARD = 2400;
-    private final int TOTALCARB_STANDARD = 300;
-    private final int DIETARYFIBER_STANDARD = 25;
-    private final int SUGAR_STANDARD = 25;
-    private final int PROTEIN_STANDARD = 50;
-    private final int POTASSIUM_STANDARD = 3500;
+public class StandardRecommendedDailyAllowance implements RecommendedDailyAllowance{
 
     public StandardRecommendedDailyAllowance() {
     }
 
+    @Override
+    public List<NutrientTotal> getAdjustedRDA(int calories) {
+        return null;
+    }
+
+    @Override
     public int getCALORIES_STANDARD() {
         return CALORIES_STANDARD;
     }
 
+    @Override
     public int getTOTALFAT_STANDARD() {
         return TOTALFAT_STANDARD;
     }
 
+    @Override
     public int getSATURATEDFAT_STANDARD() {
         return SATURATEDFAT_STANDARD;
     }
 
+    @Override
     public int getCHOLESTEROL_STANDARD() {
         return CHOLESTEROL_STANDARD;
     }
 
+    @Override
     public int getSODIUM_STANDARD() {
         return SODIUM_STANDARD;
     }
 
+    @Override
     public int getTOTALCARB_STANDARD() {
         return TOTALCARB_STANDARD;
     }
 
+    @Override
     public int getDIETARYFIBER_STANDARD() {
         return DIETARYFIBER_STANDARD;
     }
 
+    @Override
     public int getSUGAR_STANDARD() {
         return SUGAR_STANDARD;
     }
 
+    @Override
     public int getPROTEIN_STANDARD() {
         return PROTEIN_STANDARD;
     }
 
+    @Override
     public int getPOTASSIUM_STANDARD() {
         return POTASSIUM_STANDARD;
     }

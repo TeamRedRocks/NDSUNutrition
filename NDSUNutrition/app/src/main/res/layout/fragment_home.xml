@@ -46,7 +46,7 @@
             android:layout_centerHorizontal="true" />
 
         <TextView
-            android:text="Recommendations"
+            android:text="Recommendations \n (Venues for Demo)"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

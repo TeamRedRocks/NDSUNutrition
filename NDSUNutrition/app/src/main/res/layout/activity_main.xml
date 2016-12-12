@@ -42,7 +42,7 @@
         app:rippleColor="@android:color/background_dark"
         app:layout_anchorGravity="center"
         app:elevation="8dp"
-        android:layout_gravity="bottom|center"
+        android:layout_gravity="bottom|right"
         app:fabSize="normal" />
 
     <android.support.v4.view.ViewPager
