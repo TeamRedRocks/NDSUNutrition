@@ -44,8 +44,12 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
 
-        contentRetriever = new AppStateThread(getApplicationContext());
-        contentRetriever.execute();
+        //If contentRetriever hasn't been initiated yet.
+        if(contentRetriever == null)
+        {
+            contentRetriever = new AppStateThread(getApplicationContext());
+            contentRetriever.execute();
+        }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
